@@ -1,5 +1,5 @@
 import { ActionRowBuilder, StringSelectMenuBuilder } from 'discord.js';
-import { PATROL_AREAS } from '../../commands/patrol.js';
+import { PATROL_AREAS } from '../../commands/patrol.js'; // Adjust path if inside commands/utility/
 
 export default {
   customId: 'edit_patrol_area_btn',
@@ -16,6 +16,7 @@ export default {
 
     const row = new ActionRowBuilder().addComponents(selectMenu);
 
+    // Replying ephemerally acknowledges the interaction immediately
     await interaction.reply({
       content: 'Select the patrol area you want to update:',
       components: [row],
