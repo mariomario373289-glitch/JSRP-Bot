@@ -1,11 +1,13 @@
 import { EmbedBuilder } from 'discord.js';
-import { PATROL_AREAS } from '../../commands/patrol.js';
+import { PATROL_AREAS } from '../../commands/patrol.js'; // Adjust path if inside utility/
 
 export default {
-  // Matches custom IDs starting with modal_edit_area_
-  customIdPrefix: 'modal_edit_area_',
+  // If your bot matches custom IDs directly:
+  customId: 'modal_edit_area', 
+  
   async execute(interaction) {
-    const fieldIndex = parseInt(interaction.customId.replace('modal_edit_area_', ''), 10);
+    // Extract the index from the custom ID (e.g., modal_edit_area_2)
+    const fieldIndex = parseInt(interaction.customId.split('_').pop(), 10);
     const newUsername = interaction.fields.getTextInputValue('staff_usernames');
 
     const originalEmbed = interaction.message.embeds[0];
@@ -21,6 +23,8 @@ export default {
     updatedEmbed.setFields(updatedFields);
 
     await interaction.message.edit({ embeds: [updatedEmbed] });
+    
+    // Always acknowledge the modal submission
     await interaction.reply({ content: '✅ Patrol area updated!', ephemeral: true });
   },
 };
